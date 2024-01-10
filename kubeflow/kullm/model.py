@@ -28,3 +28,11 @@ def infer(instruction="", input_text=""):
 
 result = infer(input_text="고려대학교에 대해서 알려줘")
 print(result)
+
+
+"""
+torchrun --nproc_per_node 8 example_chat_completion.py \
+    --ckpt_dir llama-2-70b-chat/ \
+    --tokenizer_path tokenizer.model \
+    --max_seq_len 512 --max_batch_size 6
+    """
