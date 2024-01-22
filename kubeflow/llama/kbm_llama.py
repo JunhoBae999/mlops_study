@@ -11,7 +11,7 @@ import logging
 이 코드로 llama serving하도록 바꾼 후 도커이미지  올려서 큐베플로우에 올려보기
 """
 
-class KServeBERTSentimentModel(kserve.Model):
+class KServeLLaMASentimentModel(kserve.Model):
 
     def __init__(self, name: str):
         super().__init__(name)
@@ -54,7 +54,7 @@ class KServeBERTSentimentModel(kserve.Model):
 
 if __name__ == "__main__":
 
-  model = KServeBERTSentimentModel("bert-sentiment")
+  model = KServeLLaMASentimentModel("bert-sentiment")
   model.load()
 
   model_server = ModelServer(http_port=8080, workers=1)

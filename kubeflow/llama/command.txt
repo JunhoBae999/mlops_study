@@ -1,0 +1,16 @@
+커맨드파일 저장
+
+torchserve --start --model-store /mnt/models/model-store --models all --ncs
+
+python3.6 -m torch.distributed.run --nproc_per_node 8 example_chat_completion.py \
+    --ckpt_dir llama-2-70b-chat/ \
+    --tokenizer_path tokenizer.model \
+    --max_seq_len 512 --max_batch_size 6
+
+torchrun --nproc_per_node 4 example_text_completion.py --ckpt_dir llama-v2-70b-chat-4-shards/ --tokenizer_path tokenizer.model --max_seq_len 128 --max_batch_size 4
+
+python convert.py \
+    --input_llama_path ./llama-2-70b-chat \
+    --input_shards 8 \
+    --output_llama_path ./llama-2-70b-chat-4-shards \
+    --output_shards 4

@@ -1,0 +1,23 @@
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: nick-llama
+  namespace: kbm-u-nick
+spec:
+  predictor:
+    pytorch:
+      storageUri: "pvc://llama2-hf-volume/models/"
+      resources:
+        limits:
+            cpu: "1"
+            memory: 4Gi
+            nvidia.com/mig-1g.10gb: 8
+            ephemeral-storage: 100Gi
+        requests:
+            cpu: "1"
+            memory: 4Gi
+            nvidia.com/mig-1g.10gb: 8
+            ephemeral-storage: 100Gi
+
+
+
